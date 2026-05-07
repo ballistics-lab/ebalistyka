@@ -24,23 +24,25 @@ jobs:
       - id: v
         uses: ./.github/actions/version
 
-  build-linux-amd64:
+  build-portable-amd64:
     needs: prepare-version
-    uses: ./.github/workflows/build.yml
+    permissions:
+      issues: write
+      pull-requests: write
+    uses: ./.github/workflows/build-portable.yml
     with:
-      platform: linux
       arch: amd64
-      build_type: release
       build_name: ${{ needs.prepare-version.outputs.version }}
       retention_days: 1
 
-  build-linux-arm64:
+  build-portable-arm64:
     needs: prepare-version
-    uses: ./.github/workflows/build.yml
+    permissions:
+      issues: write
+      pull-requests: write
+    uses: ./.github/workflows/build-portable.yml
     with:
-      platform: linux
       arch: arm64
-      build_type: release
       build_name: ${{ needs.prepare-version.outputs.version }}
       retention_days: 1
 
@@ -111,8 +113,32 @@ jobs:
       build_name: ${{ needs.prepare-version.outputs.version }}
       retention_days: 1
 
+  build-appimage-amd64:
+    needs: [prepare-version, build-portable-amd64]
+    permissions:
+      issues: write
+      pull-requests: write
+    uses: ./.github/workflows/build-appimage.yml
+    with:
+      arch: amd64
+      build_name: ${{ needs.prepare-version.outputs.version }}
+      retention_days: 1
+      bundle_artifact_name: ${{ needs.build-portable-amd64.outputs.artifact_name }}
+
+  build-appimage-arm64:
+    needs: [prepare-version, build-portable-arm64]
+    permissions:
+      issues: write
+      pull-requests: write
+    uses: ./.github/workflows/build-appimage.yml
+    with:
+      arch: arm64
+      build_name: ${{ needs.prepare-version.outputs.version }}
+      retention_days: 1
+      bundle_artifact_name: ${{ needs.build-portable-arm64.outputs.artifact_name }}
+
   build-flatpak-amd64:
-    needs: prepare-version
+    needs: [prepare-version, build-portable-amd64]
     permissions:
       issues: write
       pull-requests: write
@@ -121,9 +147,10 @@ jobs:
       arch: amd64
       build_name: ${{ needs.prepare-version.outputs.version }}
       retention_days: 1
+      bundle_artifact_name: ${{ needs.build-portable-amd64.outputs.artifact_name }}
 
   build-flatpak-arm64:
-    needs: prepare-version
+    needs: [prepare-version, build-portable-arm64]
     permissions:
       issues: write
       pull-requests: write
@@ -132,9 +159,58 @@ jobs:
       arch: arm64
       build_name: ${{ needs.prepare-version.outputs.version }}
       retention_days: 1
+      bundle_artifact_name: ${{ needs.build-portable-arm64.outputs.artifact_name }}
+
+  build-deb-amd64:
+    needs: [prepare-version, build-portable-amd64]
+    permissions:
+      issues: write
+      pull-requests: write
+    uses: ./.github/workflows/build-deb.yml
+    with:
+      arch: amd64
+      build_name: ${{ needs.prepare-version.outputs.version }}
+      retention_days: 1
+      bundle_artifact_name: ${{ needs.build-portable-amd64.outputs.artifact_name }}
+
+  build-deb-arm64:
+    needs: [prepare-version, build-portable-arm64]
+    permissions:
+      issues: write
+      pull-requests: write
+    uses: ./.github/workflows/build-deb.yml
+    with:
+      arch: arm64
+      build_name: ${{ needs.prepare-version.outputs.version }}
+      retention_days: 1
+      bundle_artifact_name: ${{ needs.build-portable-arm64.outputs.artifact_name }}
+
+  build-rpm-amd64:
+    needs: [prepare-version, build-portable-amd64]
+    permissions:
+      issues: write
+      pull-requests: write
+    uses: ./.github/workflows/build-rpm.yml
+    with:
+      arch: amd64
+      build_name: ${{ needs.prepare-version.outputs.version }}
+      retention_days: 1
+      bundle_artifact_name: ${{ needs.build-portable-amd64.outputs.artifact_name }}
+
+  build-rpm-arm64:
+    needs: [prepare-version, build-portable-arm64]
+    permissions:
+      issues: write
+      pull-requests: write
+    uses: ./.github/workflows/build-rpm.yml
+    with:
+      arch: arm64
+      build_name: ${{ needs.prepare-version.outputs.version }}
+      retention_days: 1
+      bundle_artifact_name: ${{ needs.build-portable-arm64.outputs.artifact_name }}
 
   release:
-    needs: [prepare-version, build-linux-amd64, build-linux-arm64, build-windows-amd64, build-android, build-android-aab, build-snap-amd64, build-snap-arm64, build-flatpak-amd64, build-flatpak-arm64]
+    needs: [prepare-version, build-portable-amd64, build-portable-arm64, build-windows-amd64, build-android, build-android-aab, build-snap-amd64, build-snap-arm64, build-appimage-amd64, build-appimage-arm64, build-flatpak-amd64, build-flatpak-arm64, build-deb-amd64, build-deb-arm64, build-rpm-amd64, build-rpm-arm64]
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -164,7 +240,9 @@ jobs:
             -name "*.apk"         -o \
             -name "*.aab"         -o \
             -name "*.snap"        -o \
-            -name "*.flatpak" \
+            -name "*.flatpak"     -o \
+            -name "*.deb"         -o \
+            -name "*.rpm" \
           \) -exec cp {} release/ \;
 
           echo "=== Release assets ==="
@@ -206,3 +284,12 @@ jobs:
           prerelease: ${{ contains(github.ref_name, '-') }}
           fail_on_unmatched_files: true
           files: release/*
+
+  publish:
+    if: github.ref_type == 'tag'
+    needs: [prepare-version, release]
+    uses: ./.github/workflows/publish.yml
+    with:
+      tag_name: ${{ github.ref_name }}
+      channel: ${{ contains(needs.prepare-version.outputs.version, '-') && 'beta' || 'stable' }}
+    secrets: inherit

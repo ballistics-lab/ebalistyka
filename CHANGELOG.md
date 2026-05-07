@@ -12,12 +12,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 [![GitHub release][GitHubCompareBadge]][Unreleased]
 
 
+## v0.1.11-dev (2026-05-07)
+[![GitHub release][GitHubReleaseBadge]][v0.1.11-dev]
+
+## Added
+- **Linux deb package** — `.deb` builds for x86_64 and arm64; installs to `/opt/ebalistyka/`; in-app update sheet detects deb install via `EBALISTYKA_INSTALLER=deb`
+- **Linux rpm package** — `.rpm` builds for x86_64 and arm64; installs to `/opt/ebalistyka/`; in-app update sheet detects rpm install via `EBALISTYKA_INSTALLER=rpm`
+- **Linux AUR package** — `ebalistyka-bin` PKGBUILD for Arch/Manjaro (`yay -S ebalistyka-bin`); installs to `/opt/ebalistyka/`; in-app update sheet detects AUR install via `EBALISTYKA_INSTALLER=aur`
+
+
 ## v0.1.10-dev (2026-05-07)
 [![GitHub release][GitHubReleaseBadge]][v0.1.10-dev]
 
 ### Added
 - **Linux Snap package** — `.snap` builds for x86_64 and arm64; published to Snap Store on release (`stable` / `beta` channel); auto-updates via Snap Store; in-app update sheet links to Snap Store for snap installs
-- **Linux Flatpak package** — `.flatpak` builds for x86_64 and arm64
+- **Linux Flatpak package** — `.flatpak` builds for x86_64 and arm64; in-app update sheet detects Flatpak sandbox via `FLATPAK_ID`
 
 
 ## v0.1.9-dev (2026-05-06)
@@ -383,7 +392,8 @@ Initial alpha release — first functional build of the ballistic trajectory cal
 - `OBJECTBOX_MIGRATION.md`: migration details
 
 
-[Unreleased]: https://github.com/o-murphy/ebalistyka-app/compare/v0.1.10..HEAD
+[Unreleased]: https://github.com/o-murphy/ebalistyka-app/compare/v0.1.11-dev..HEAD
+[v0.1.11-dev]: https://github.com/o-murphy/ebalistyka-app/releases/tag/v0.1.11-dev
 [v0.1.10-dev]: https://github.com/o-murphy/ebalistyka-app/releases/tag/v0.1.10-dev
 [v0.1.9-dev]: https://github.com/o-murphy/ebalistyka-app/releases/tag/v0.1.9-dev
 [v0.1.8]: https://github.com/o-murphy/ebalistyka-app/releases/tag/v0.1.8
