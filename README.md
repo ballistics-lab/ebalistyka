@@ -4,13 +4,18 @@
 
 [![License]](LICENSE)
 [![Release]][GitHub Release Latest]
+[![Prerelease]][GitHub Releases]
 ![Status]
 [![Flutter Shield]][Flutter]
 ![Linux] ![Windows] ![Android]
 
-![AUR Version]
+[![AUR Version]][AUR Package]
+[![Snapcraft Version]][Snapcraft Package]
 
-<a href='https://snapcraft.io/ebalistyka'><img width='200' alt='Get it on Snap Store' src='https://snapcraft.io/static/images/badges/en/snap-store-black.svg'/></a>
+[![Google Play]][Google Play Internal Test]
+
+<!-- [![Snap](https://snapcraft.io/static/images/badges/en/snap-store-black.svg)](https://snapcraft.io/ebalistyka) -->
+<!-- <a href='https://snapcraft.io/ebalistyka'><img width='182' alt='Get it on Snap Store' src='https://snapcraft.io/static/images/badges/en/snap-store-black.svg'/></a> -->
 <!-- <a href='https://flathub.org/apps/com.o.murphy.ebalistyka'><img width='200' alt='Get it on Flathub' src='https://flathub.org/api/badge?svg?locale=en&light'/></a> -->
 
 [![Build (Android)](https://github.com/o-murphy/ebalistyka-app/actions/workflows/build-apk.yml/badge.svg)](https://github.com/o-murphy/ebalistyka-app/actions/workflows/build-apk.yml)
@@ -472,8 +477,11 @@ See [LICENSE](LICENSE) for the full text. See [CHANGELOG](CHANGELOG.md) for rele
 [Flutter Shield]: https://img.shields.io/badge/Flutter-3.41.7-02569B?logo=flutter
 [Flutter]: https://flutter.dev
 
-[Release]: https://img.shields.io/github/v/release/o-murphy/ebalistyka-app?cacheSeconds=0
+[Release]: https://img.shields.io/github/v/release/o-murphy/ebalistyka-app?logo=github&cacheSeconds=0
 [GitHub Release Latest]: https://github.com/o-murphy/ebalistyka-app/releases/latest
+
+[Prerelease]: https://img.shields.io/github/v/release/o-murphy/ebalistyka-app?include_prereleases&logo=github&cacheSeconds=0
+[GitHub Releases]: https://github.com/o-murphy/ebalistyka-app/releases
 
 [License]: https://img.shields.io/badge/License-GPL%20v3-blue.svg
 [Status]: https://img.shields.io/badge/status-alpha-orange
@@ -484,7 +492,15 @@ See [LICENSE](LICENSE) for the full text. See [CHANGELOG](CHANGELOG.md) for rele
 
 [Android]: https://img.shields.io/badge/Android-arm64%20%7C%20armv7%20%7C%20x86__64-grey?logo=android&logoColor=white&labelColor=3DDC84
 
-[AUR Version]: https://img.shields.io/aur/version/ebalistyka-bin?style=for-the-badge&logo=arch-linux&logoColor=fff&labelColor=1793D1
+[AUR Version]: https://img.shields.io/aur/version/ebalistyka-bin?style=for-the-badge&logo=arch-linux&cacheSeconds=0
+[AUR Package]: https://aur.archlinux.org/packages/ebalistyka-bin
+
+[Snapcraft Version]: https://img.shields.io/snapcraft/v/ebalistyka/latest/edge?style=for-the-badge&logo=snapcraft&cacheSeconds=0
+[Snapcraft Package]: https://snapcraft.io/ebalistyka
+
+[Google Play]: https://img.shields.io/badge/Internal%20Test%20Registation-black?style=for-the-badge&logo=google-play&label=Google%20Play&labelColor=000&color=orange
+
+[Google Play Internal Test]: https://docs.google.com/forms/d/e/1FAIpQLSdMKHwnBLuwSo9BkqPXRPx4eZwio6RiaNxWEyrvyEpK0dLcuA/viewform?usp=dialog
 
 <!-- DOWNLOADS -->
 [DownloadAppImageAmd64]: https://github.com/o-murphy/ebalistyka-app/releases/latest/download/ebalistyka_linux_x86_64.AppImage

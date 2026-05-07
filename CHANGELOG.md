@@ -12,6 +12,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 [![GitHub release][GitHubCompareBadge]][Unreleased]
 
 
+## v0.1.12 (2026-05-07)
+[![GitHub release][GitHubReleaseBadge]][v0.1.12]
+
+### Changed
+- **Publishng Flow** - publishing to Snapcraft and AUR
+
+
 ## v0.1.11-dev (2026-05-07)
 [![GitHub release][GitHubReleaseBadge]][v0.1.11-dev]
 
@@ -392,7 +399,8 @@ Initial alpha release — first functional build of the ballistic trajectory cal
 - `OBJECTBOX_MIGRATION.md`: migration details
 
 
-[Unreleased]: https://github.com/o-murphy/ebalistyka-app/compare/v0.1.11-dev..HEAD
+[Unreleased]: https://github.com/o-murphy/ebalistyka-app/compare/v0.1.12..HEAD
+[v0.1.12]: https://github.com/o-murphy/ebalistyka-app/releases/tag/v0.1.12
 [v0.1.11-dev]: https://github.com/o-murphy/ebalistyka-app/releases/tag/v0.1.11-dev
 [v0.1.10-dev]: https://github.com/o-murphy/ebalistyka-app/releases/tag/v0.1.10-dev
 [v0.1.9-dev]: https://github.com/o-murphy/ebalistyka-app/releases/tag/v0.1.9-dev

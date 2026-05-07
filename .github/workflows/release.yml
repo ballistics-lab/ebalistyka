@@ -285,11 +285,19 @@ jobs:
           fail_on_unmatched_files: true
           files: release/*
 
-  publish:
+  publish-snap:
     if: github.ref_type == 'tag'
     needs: [prepare-version, release]
-    uses: ./.github/workflows/publish.yml
+    uses: ./.github/workflows/publish-snap.yml
     with:
       tag_name: ${{ github.ref_name }}
       channel: ${{ contains(needs.prepare-version.outputs.version, '-') && 'beta' || 'stable' }}
+    secrets: inherit
+
+  publish-aur:
+    if: github.ref_type == 'tag'
+    needs: [prepare-version, release]
+    uses: ./.github/workflows/publish-aur.yml
+    with:
+      tag_name: ${{ github.ref_name }}
     secrets: inherit

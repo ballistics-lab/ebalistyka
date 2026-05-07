@@ -1,4 +1,4 @@
-name: Build portable (Linux)
+name: Build Linux Portable
 
 on:
   pull_request:

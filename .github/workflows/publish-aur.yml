@@ -1,0 +1,70 @@
+name: Publish AUR
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag_name:
+        description: "Release tag to publish (e.g. v0.1.11)"
+        required: true
+        type: string
+  workflow_call:
+    inputs:
+      tag_name:
+        description: "Release tag to publish"
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  aur:
+    runs-on: ubuntu-latest
+    container: archlinux:latest
+    steps:
+      - name: Install dependencies
+        run: |
+          pacman -Sy --noconfirm git openssh
+          useradd -m builder
+
+      - uses: actions/checkout@v4
+
+      - name: Update PKGBUILD checksums
+        run: |
+          TAG="${{ inputs.tag_name || github.event.release.tag_name }}"
+          chown -R builder:builder "$GITHUB_WORKSPACE"
+          su builder -c "bash '$GITHUB_WORKSPACE/scripts/update-aur.sh' '${TAG#v}'"
+
+      - name: Publish to AUR
+        shell: bash
+        env:
+          AUR_SSH_KEY: ${{ secrets.AUR_SSH_KEY }}
+          TAG: ${{ inputs.tag_name || github.event.release.tag_name }}
+        run: |
+          mkdir -p /root/.ssh
+          printenv AUR_SSH_KEY > /root/.ssh/aur
+          chmod 600 /root/.ssh/aur
+          ssh-keyscan -t rsa,ecdsa,ed25519 aur.archlinux.org >> /root/.ssh/known_hosts
+
+          echo "=== Key fingerprint ==="
+          ssh-keygen -lf /root/.ssh/aur
+
+          echo "=== SSH connection test ==="
+          ssh -i /root/.ssh/aur -o StrictHostKeyChecking=no aur@aur.archlinux.org || true
+
+          git config --global user.name "o-murphy"
+          git config --global user.email "thehelixpg@gmail.com"
+          git config --global --add safe.directory '*'
+
+          GIT_SSH_COMMAND="ssh -i /root/.ssh/aur -v" \
+            git clone ssh://aur@aur.archlinux.org/ebalistyka-bin.git /tmp/aur-repo
+
+          cp "$GITHUB_WORKSPACE/aur/PKGBUILD" /tmp/aur-repo/
+          chown -R builder:builder /tmp/aur-repo
+          su builder -c "cd /tmp/aur-repo && makepkg --printsrcinfo > .SRCINFO"
+
+          cd /tmp/aur-repo
+          git add PKGBUILD .SRCINFO
+          git diff --cached --quiet && exit 0
+          git commit -m "upgpkg: ebalistyka-bin ${TAG}"
+          GIT_SSH_COMMAND="ssh -i /root/.ssh/aur" git push
