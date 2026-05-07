@@ -62,7 +62,7 @@ jobs:
       artifact_url:  ${{ steps.upload.outputs.artifact-url }}
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           submodules: recursive
           fetch-depth: 0
@@ -86,7 +86,7 @@ jobs:
           echo "artifact_name=ebalistyka-snap-${ARCH_SUFFIX}-${BUILD_NAME}-${BUILD_NUMBER}" >> $GITHUB_OUTPUT
 
       - name: Cache LXD base image
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: /var/snap/lxd/common/lxd/storage-pools/default/images
           key: lxd-core22-${{ runner.arch }}
@@ -113,7 +113,7 @@ jobs:
 
       - name: Upload artifact
         id: upload
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: ${{ steps.meta.outputs.artifact_name }}
           path: artifacts/snap/

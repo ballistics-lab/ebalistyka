@@ -83,7 +83,7 @@ jobs:
       artifact_url: ${{ steps.upload.outputs.artifact-url }}
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           submodules: recursive
           fetch-depth: 0
@@ -137,7 +137,7 @@ jobs:
 
       - name: Cache pub packages (Linux)
         if: inputs.platform == 'linux'
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: ~/.pub-cache
           key: pub-linux-${{ inputs.arch }}-${{ hashFiles('pubspec.lock') }}
@@ -145,14 +145,14 @@ jobs:
 
       - name: Cache pub packages (Windows)
         if: inputs.platform == 'windows'
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: ~\AppData\Local\Pub\Cache
           key: pub-windows-${{ inputs.arch }}-${{ hashFiles('pubspec.lock') }}
           restore-keys: pub-windows-${{ inputs.arch }}-
 
       - name: Cache bclibc build
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: |
             build/${{ inputs.platform }}/${{ steps.meta.outputs.flutter_arch }}/bclibc_ffi_build
@@ -255,7 +255,7 @@ jobs:
 
       - name: Upload artifact
         id: upload
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: ${{ steps.meta.outputs.artifact_name }}
           path: artifacts/
