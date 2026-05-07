@@ -295,7 +295,7 @@ jobs:
     secrets: inherit
 
   publish-aur:
-    if: github.ref_type == 'tag'
+    if: github.ref_type == 'tag' && !contains(github.ref_name, '-')
     needs: [prepare-version, release]
     uses: ./.github/workflows/publish-aur.yml
     with:
