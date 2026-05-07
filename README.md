@@ -4,7 +4,6 @@
 
 [![License]](LICENSE)
 [![Release]][GitHub Release Latest]
-[![Prerelease]][GitHub Releases]
 ![Status]
 [![Flutter Shield]][Flutter]
 ![Linux] ![Windows] ![Android]
@@ -495,11 +494,10 @@ See [LICENSE](LICENSE) for the full text. See [CHANGELOG](CHANGELOG.md) for rele
 [AUR Version]: https://img.shields.io/aur/version/ebalistyka-bin?style=for-the-badge&logo=arch-linux&cacheSeconds=0
 [AUR Package]: https://aur.archlinux.org/packages/ebalistyka-bin
 
-[Snapcraft Version]: https://img.shields.io/snapcraft/v/ebalistyka/latest/edge?style=for-the-badge&logo=snapcraft&cacheSeconds=0
+[Snapcraft Version]: https://img.shields.io/snapcraft/v/ebalistyka/latest/stable?style=for-the-badge&logo=snapcraft&cacheSeconds=0
 [Snapcraft Package]: https://snapcraft.io/ebalistyka
 
-[Google Play]: https://img.shields.io/badge/Internal%20Test%20Registation-black?style=for-the-badge&logo=google-play&label=Google%20Play&labelColor=000&color=orange
-
+[Google Play]: https://img.shields.io/badge/Internal%20Test%20Registration-black?style=for-the-badge&logo=google-play&label=Google%20Play&labelColor=000&color=orange
 [Google Play Internal Test]: https://docs.google.com/forms/d/e/1FAIpQLSdMKHwnBLuwSo9BkqPXRPx4eZwio6RiaNxWEyrvyEpK0dLcuA/viewform?usp=dialog
 
 <!-- DOWNLOADS -->
