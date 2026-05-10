@@ -20,6 +20,20 @@ android {
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
 
+    flavorDimensions.add("type")
+
+    productFlavors {
+        create("googlePlay") {
+            dimension = "type"
+            // You can add an ID suffix if you want a separate app for testing
+            // applicationIdSuffix = ".play" 
+        }
+        create("sideload") {
+            dimension = "type"
+            // Тут нічого не міняємо, це буде "повна" версія
+        }
+    }
+
     compileOptions {
         isCoreLibraryDesugaringEnabled = true
         sourceCompatibility = JavaVersion.VERSION_17
