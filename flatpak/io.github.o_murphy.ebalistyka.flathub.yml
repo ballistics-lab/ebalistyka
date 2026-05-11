@@ -1,6 +1,6 @@
 app-id: io.github.o_murphy.ebalistyka
 runtime: org.gnome.Platform
-runtime-version: '49'
+runtime-version: '48'
 sdk: org.gnome.Sdk
 command: ebalistyka
 
@@ -28,5 +28,25 @@ modules:
       - install -Dm644 io.github.o_murphy.ebalistyka.metainfo.xml
           /app/share/metainfo/io.github.o_murphy.ebalistyka.metainfo.xml
     sources:
-      - type: dir
-        path: bundle
+      # Pre-built Flutter bundle from GitHub Releases (arch-specific)
+      - type: archive
+        only-arches:
+          - x86_64
+        url: https://github.com/o-murphy/ebalistyka-app/releases/download/v__VERSION__/ebalistyka_linux_x86_64.tar.gz
+        sha256: __SHA256_X86_64__
+        strip-components: 1
+      - type: archive
+        only-arches:
+          - aarch64
+        url: https://github.com/o-murphy/ebalistyka-app/releases/download/v__VERSION__/ebalistyka_linux_aarch64.tar.gz
+        sha256: __SHA256_AARCH64__
+        strip-components: 1
+      # Static files committed to the Flathub repo alongside the manifest
+      - type: file
+        path: ebalistyka-wrapper.sh
+      - type: file
+        path: io.github.o_murphy.ebalistyka.desktop
+      - type: file
+        path: io.github.o_murphy.ebalistyka.metainfo.xml
+      - type: file
+        path: io.github.o_murphy.ebalistyka.png
