@@ -38,11 +38,21 @@ jobs:
       - name: Import GPG key for signed commits
         env:
           GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
+          GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
         run: |
           echo "$GPG_PRIVATE_KEY" | gpg --batch --import
           GPG_KEY_ID=$(gpg --list-secret-keys --keyid-format=long \
             | grep '^sec' | head -1 | awk '{print $2}' | cut -d/ -f2)
           echo "GPG_KEY_ID=$GPG_KEY_ID" >> "$GITHUB_ENV"
+          mkdir -p ~/.gnupg && chmod 700 ~/.gnupg
+          echo "allow-preset-passphrase" >> ~/.gnupg/gpg-agent.conf
+          gpgconf --reload gpg-agent
+          LIBEXEC=$(gpgconf --list-dirs libexecdir)
+          gpg --with-keygrip --list-secret-keys "$GPG_KEY_ID" \
+            | grep 'Keygrip' | awk '{print $3}' \
+            | while read -r KEYGRIP; do
+                echo "$GPG_PASSPHRASE" | "${LIBEXEC}/gpg-preset-passphrase" --preset "$KEYGRIP"
+              done
 
       - name: Publish to AUR
         shell: bash
