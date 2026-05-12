@@ -1,4 +1,9 @@
-# ebalistyka
+<h1 style="display: flex; align-items: center; gap: 10px;">
+  <img src="./assets/svg/logo/favicon_scaled.svg" alt="favicon" width="50" height="50"> 
+  eBalistyka
+</h1>
+
+A high performance cross-platform ballistic calculator
 
 [![Made in Ukraine]][SWUBadge]
 
@@ -415,19 +420,19 @@ On Android, `file_picker` cannot filter by custom extensions (`.ebcp`, `.a7p`) b
 
 ### App (`ebalistyka`)
 
-| Package                                                                 | Role                                         |
-| ----------------------------------------------------------------------- | -------------------------------------------- |
-| [flutter_riverpod](https://pub.dev/packages/flutter_riverpod)           | State management                             |
-| [go_router](https://pub.dev/packages/go_router)                         | Navigation                                   |
-| [flutter_localizations](https://pub.dev/packages/flutter_localizations) | EN + UA localisation                         |
-| [flutter_svg](https://pub.dev/packages/flutter_svg)                     | SVG reticle & target rendering               |
-| [window_manager](https://pub.dev/packages/window_manager)               | Desktop window size / title / icon           |
-| [file_picker](https://pub.dev/packages/file_picker)                     | Import file picker                           |
-| [share_plus](https://pub.dev/packages/share_plus)                       | Export / share files                         |
-| [url_launcher](https://pub.dev/packages/url_launcher)                   | External links                               |
-| [package_info_plus](https://pub.dev/packages/package_info_plus)         | App version info                             |
-| [flutter_markdown_plus](https://pub.dev/packages/flutter_markdown_plus) | App help widgets                             |
-| [ota_update](https://pub.dev/packages/ota_update)                       | autoupdate for Android sideloadinstallations |
+| Package                                                                 | Role                                          |
+| ----------------------------------------------------------------------- | --------------------------------------------- |
+| [flutter_riverpod](https://pub.dev/packages/flutter_riverpod)           | State management                              |
+| [go_router](https://pub.dev/packages/go_router)                         | Navigation                                    |
+| [flutter_localizations](https://pub.dev/packages/flutter_localizations) | EN + UA localisation                          |
+| [flutter_svg](https://pub.dev/packages/flutter_svg)                     | SVG reticle & target rendering                |
+| [window_manager](https://pub.dev/packages/window_manager)               | Desktop window size / title / icon            |
+| [file_picker](https://pub.dev/packages/file_picker)                     | Import file picker                            |
+| [share_plus](https://pub.dev/packages/share_plus)                       | Export / share files                          |
+| [url_launcher](https://pub.dev/packages/url_launcher)                   | External links                                |
+| [package_info_plus](https://pub.dev/packages/package_info_plus)         | App version info                              |
+| [flutter_markdown_plus](https://pub.dev/packages/flutter_markdown_plus) | App help widgets                              |
+| [ota_update](https://pub.dev/packages/ota_update)                       | autoupdate for Android sideload installations |
 
 ### `packages/bclibc_ffi`
 
