@@ -29,13 +29,38 @@ jobs:
   winget:
     runs-on: windows-latest
     steps:
-      - name: Install wingetcreate
-        run: dotnet tool install --global wingetcreate
+      - name: Check winget availability
+        id: check_winget
+        run: |
+          if (winget --version 2>$null) {
+            echo "winget_installed=true" >> $env:GITHUB_OUTPUT
+            winget --version
+          } else {
+            echo "winget_installed=false" >> $env:GITHUB_OUTPUT
+          }
+        shell: pwsh
+
+      - name: Install winget (if missing)
+        if: steps.check_winget.outputs.winget_installed == 'false'
+        uses: Cyberboss/install-winget@v1
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          wget_release_id: latest
+
+      - name: Fix winget sources and install wingetcreate
+        shell: pwsh
+        run: |
+          winget source reset --force
+          winget source update
+          
+          Start-Sleep -Seconds 3
+          
+          winget install wingetcreate --disable-interactivity --accept-source-agreements
 
       - name: Submit to Winget
         shell: pwsh
         run: |
-          wingetcreate update o-murphy.ebalistyka `
+          wingetcreate update "o-murphy.ebalistyka" `
             --version "${{ inputs.version }}.0" `
             --urls "https://github.com/o-murphy/ebalistyka-app/releases/download/${{ inputs.tag_name }}/ebalistyka_windows_x86_64.zip" `
             --token "${{ secrets.WINGET_TOKEN }}" `
