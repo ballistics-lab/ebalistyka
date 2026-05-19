@@ -12,6 +12,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 [![GitHub release][GitHubCompareBadge]][Unreleased]
 
 
+## v0.1.15 (2026-05-19)
+[![GitHub release][GitHubReleaseBadge]][v0.1.15]
+
+### CI / Distribution
+- **Flatpak** — CI-білд переписано: без `--privileged` контейнера, напряму через `flatpak-builder --sandbox --user`; матриця amd64 + arm64 на кожен PR
+- **Flatpak** — `generated-sources.json` автоматично генерується і комітується на `main` при кожному релізному тегу (для Flathub)
+- **Flatpak** — OARS rating та метадані для Flathub submission
+- **Snap** — матриця amd64 + arm64 на PR-білди (аналогічно Flatpak)
+- **Winget** — публікація в Windows Package Manager
+- **AUR** — виправлено GPG signing у `publish-aur.yml`
+- **CI** — уніфіковано retention artifacts до 2 днів; підняті версії CI actions
+
+
 ## v0.1.14 (2026-05-12)
 [![GitHub release][GitHubReleaseBadge]][v0.1.14]
 
@@ -421,7 +434,8 @@ Initial alpha release — first functional build of the ballistic trajectory cal
 - `OBJECTBOX_MIGRATION.md`: migration details
 
 
-[Unreleased]: https://github.com/o-murphy/ebalistyka-app/compare/v0.1.14..HEAD
+[Unreleased]: https://github.com/o-murphy/ebalistyka-app/compare/v0.1.15..HEAD
+[v0.1.15]: https://github.com/o-murphy/ebalistyka-app/releases/tag/v0.1.15
 [v0.1.14]: https://github.com/o-murphy/ebalistyka-app/releases/tag/v0.1.14
 [v0.1.13]: https://github.com/o-murphy/ebalistyka-app/releases/tag/v0.1.13
 [v0.1.12]: https://github.com/o-murphy/ebalistyka-app/releases/tag/v0.1.12
