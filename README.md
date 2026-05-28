@@ -24,14 +24,11 @@ A high performance cross-platform ballistic calculator
 <!-- <a href='https://snapcraft.io/ebalistyka'><img width='182' alt='Get it on Snap Store' src='https://snapcraft.io/static/images/badges/en/snap-store-black.svg'/></a> -->
 <!-- <a href='https://flathub.org/apps/com.o.murphy.ebalistyka'><img width='200' alt='Get it on Flathub' src='https://flathub.org/api/badge?svg?locale=en&light'/></a> -->
 
-[![Build (Android)](https://github.com/o-murphy/ebalistyka/actions/workflows/build-apk.yml/badge.svg)](https://github.com/o-murphy/ebalistyka/actions/workflows/build-apk.yml)
+[![Build (Android)](https://github.com/o-murphy/ebalistyka/actions/workflows/build-android.yml/badge.svg)](https://github.com/o-murphy/ebalistyka/actions/workflows/build-apk.yml)
 [![Build (Windows)](https://github.com/o-murphy/ebalistyka/actions/workflows/build-exe.yml/badge.svg)](https://github.com/o-murphy/ebalistyka/actions/workflows/build-exe.yml)
-[![Build (Linux portable)](https://github.com/o-murphy/ebalistyka/actions/workflows/build-portable.yml/badge.svg)](https://github.com/o-murphy/ebalistyka/actions/workflows/build-portable.yml)
-[![Build (Linux AppImage)](https://github.com/o-murphy/ebalistyka/actions/workflows/build-appimage.yml/badge.svg)](https://github.com/o-murphy/ebalistyka/actions/workflows/build-appimage.yml)
+[![Build (Linux Portable)](https://github.com/o-murphy/ebalistyka/actions/workflows/build-portable.yml/badge.svg)](https://github.com/o-murphy/ebalistyka/actions/workflows/build-portable.yml)
 [![Build (Linux Snap)](https://github.com/o-murphy/ebalistyka/actions/workflows/build-snap.yml/badge.svg)](https://github.com/o-murphy/ebalistyka/actions/workflows/build-snap.yml)
 [![Build (Linux Flatpak)](https://github.com/o-murphy/ebalistyka/actions/workflows/build-flatpak.yml/badge.svg)](https://github.com/o-murphy/ebalistyka/actions/workflows/build-flatpak.yml)
-[![Build (Linux deb)](https://github.com/o-murphy/ebalistyka/actions/workflows/build-deb.yml/badge.svg)](https://github.com/o-murphy/ebalistyka/actions/workflows/build-deb.yml)
-[![Build (Linux rpm)](https://github.com/o-murphy/ebalistyka/actions/workflows/build-rpm.yml/badge.svg)](https://github.com/o-murphy/ebalistyka/actions/workflows/build-rpm.yml)
 
 
 > [!WARNING]
