@@ -211,6 +211,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get columnHeight => 'Height';
 
   @override
+  String get sightLine => 'Sight line';
+
+  @override
   String get columnDrop => 'Drop';
 
   @override

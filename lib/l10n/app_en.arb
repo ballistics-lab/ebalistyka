@@ -139,6 +139,8 @@
     "@columnVelocity": {"description": "Trajectory table column header for bullet velocity"},
     "columnHeight": "Height",
     "@columnHeight": {"description": "Trajectory table column header for bullet height above bore"},
+    "sightLine": "Sight line",
+    "@sightLine": {"description": "Chart legend label for the line of sight reference line"},
     "columnDrop": "Drop",
     "@columnDrop": {"description": "Trajectory table column header for vertical drop in distance units"},
     "columnDropAngle": "Drop°",

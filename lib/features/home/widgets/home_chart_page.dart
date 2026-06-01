@@ -45,6 +45,7 @@ class HomeChartPage extends ConsumerWidget {
             selectedIndex: cs.selectedChartIndex,
             snapDistM: chart.snapDistM,
             showSubsonicLine: true,
+            showSightLine: true,
             onIndexSelected: (i) =>
                 ref.read(homeVmProvider.notifier).selectChartPoint(i),
           ),

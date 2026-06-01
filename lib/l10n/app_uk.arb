@@ -72,6 +72,7 @@
     "columnTime": "Час",
     "columnVelocity": "Швидкість",
     "columnHeight": "Висота",
+    "sightLine": "Вісь прицілу",
     "columnDrop": "Верт. поправка",
     "columnDropAngle": "Верт. поправка°",
     "columnDropClicks": "Верт. поправка",

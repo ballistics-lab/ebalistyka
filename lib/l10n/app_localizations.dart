@@ -500,6 +500,12 @@ abstract class AppLocalizations {
   /// **'Height'**
   String get columnHeight;
 
+  /// Chart legend label for the line of sight reference line
+  ///
+  /// In en, this message translates to:
+  /// **'Sight line'**
+  String get sightLine;
+
   /// Trajectory table column header for vertical drop in distance units
   ///
   /// In en, this message translates to:

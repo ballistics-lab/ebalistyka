@@ -211,6 +211,9 @@ class AppLocalizationsUk extends AppLocalizations {
   String get columnHeight => 'Висота';
 
   @override
+  String get sightLine => 'Вісь прицілу';
+
+  @override
   String get columnDrop => 'Верт. поправка';
 
   @override

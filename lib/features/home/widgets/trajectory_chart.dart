@@ -9,6 +9,7 @@ class TrajectoryChart extends StatelessWidget {
   final ValueChanged<int>? onIndexSelected;
   final double snapDistM;
   final bool showSubsonicLine;
+  final bool showSightLine;
 
   const TrajectoryChart({
     super.key,
@@ -17,6 +18,7 @@ class TrajectoryChart extends StatelessWidget {
     this.onIndexSelected,
     this.snapDistM = 1.0,
     this.showSubsonicLine = false,
+    this.showSightLine = false,
   });
 
   int _tapToIndex(double tapX, double paintWidth) {
@@ -71,6 +73,7 @@ class TrajectoryChart extends StatelessWidget {
               textColor: cs.onSurface,
               selectedColor: cs.tertiary,
               subsonicLineColor: showSubsonicLine ? cs.tertiary : null,
+              sightLineColor: showSightLine ? cs.tertiary : null,
               l10n: l10n,
             ),
             child: const SizedBox.expand(),
@@ -86,6 +89,7 @@ class _ChartPainter extends CustomPainter {
   final int? selectedIndex;
   final Color heightColor, velColor, gridColor, textColor, selectedColor;
   final Color? subsonicLineColor;
+  final Color? sightLineColor;
   final AppLocalizations l10n;
 
   static const _ml = 28.0, _mr = 24.0, _mt = 16.0, _mb = 14.0;
@@ -100,6 +104,7 @@ class _ChartPainter extends CustomPainter {
     required this.selectedColor,
     required this.l10n,
     this.subsonicLineColor,
+    this.sightLineColor,
   });
 
   @override
@@ -170,6 +175,21 @@ class _ChartPainter extends CustomPainter {
     // Velocity line (dashed)
     _drawLine(canvas, dists, vels, px, pyV, velColor, 1.5, dashed: true);
 
+    // Sight line — dashed horizontal at height=0, only if 0 is within the visible range
+    if (sightLineColor != null && yHMin <= 0 && yHMax >= 0) {
+      final sy = pyH(0);
+      _drawLine(
+        canvas,
+        [xMin, xMax],
+        [sy, sy],
+        px,
+        (v) => v,
+        sightLineColor!,
+        1.0,
+        dashed: true,
+      );
+    }
+
     // Height line (solid, on top)
     _drawLine(canvas, dists, heights, px, pyH, heightColor, 2.0);
 
@@ -209,7 +229,7 @@ class _ChartPainter extends CustomPainter {
       );
 
       // Dot on height curve
-      canvas.drawCircle(Offset(sx, syH), 5.0, Paint()..color = selectedColor);
+      canvas.drawCircle(Offset(sx, syH), 5.0, Paint()..color = heightColor);
       canvas.drawCircle(
         Offset(sx, syH),
         3.0,
@@ -217,12 +237,27 @@ class _ChartPainter extends CustomPainter {
       );
 
       // Dot on velocity curve
-      canvas.drawCircle(Offset(sx, syV), 5.0, Paint()..color = selectedColor);
+      canvas.drawCircle(Offset(sx, syV), 5.0, Paint()..color = velColor);
       canvas.drawCircle(
         Offset(sx, syV),
         3.0,
         Paint()..color = Colors.white.withAlpha(200),
       );
+
+      // Dot on sight line
+      if (sightLineColor != null && yHMin <= 0 && yHMax >= 0) {
+        final syS = pyH(0);
+        canvas.drawCircle(
+          Offset(sx, syS),
+          5.0,
+          Paint()..color = sightLineColor!,
+        );
+        canvas.drawCircle(
+          Offset(sx, syS),
+          3.0,
+          Paint()..color = Colors.white.withAlpha(200),
+        );
+      }
     }
 
     // Border
@@ -243,6 +278,15 @@ class _ChartPainter extends CustomPainter {
       l10n.columnVelocity,
       dashed: true,
     );
+    if (sightLineColor != null) {
+      _drawLegendItem(
+        canvas,
+        Offset(_ml + 160, 2),
+        sightLineColor!,
+        l10n.sightLine,
+        dashed: true,
+      );
+    }
   }
 
   void _drawLine(
@@ -357,5 +401,6 @@ class _ChartPainter extends CustomPainter {
   bool shouldRepaint(covariant _ChartPainter old) =>
       old.points != points ||
       old.selectedIndex != selectedIndex ||
-      old.subsonicLineColor != subsonicLineColor;
+      old.subsonicLineColor != subsonicLineColor ||
+      old.sightLineColor != sightLineColor;
 }
